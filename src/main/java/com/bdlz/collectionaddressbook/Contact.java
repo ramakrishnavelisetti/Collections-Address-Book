@@ -22,6 +22,10 @@ public class Contact {
         this.emailId = emailId;
     }
 
+    public Contact() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
