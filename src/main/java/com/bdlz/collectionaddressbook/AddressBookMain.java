@@ -10,7 +10,9 @@ public class AddressBookMain {
 
     public static void addContactDetails() {
         System.out.println("Enter your choice");
-        System.out.println("1 : Add new contact    2 : Edit contact ");
+        System.out.println(" 1 : Add new contact\n " +
+                           "2 : Edit the contact\n " +
+                           "3 : Delete the contact ");
         int choice = sc.nextInt();
         switch (choice) {
             case 1:
@@ -60,6 +62,15 @@ public class AddressBookMain {
                 addContactDetails();
                 sc.close();
                 break;
+            case 3:
+                System.out.println("");
+                System.out.println("Enter First Name to Delete Contact");
+                String deleteName = sc.next();
+                deleteContact(deleteName);
+                System.out.println("Enter name is Invalid Please enter valid name");
+                System.out.println("");
+                addContactDetails();
+                break;
         }
     }
     public static void editContact(String editName,String firstName, String lastName, String address, String city,
@@ -97,6 +108,17 @@ public class AddressBookMain {
                     + "MobileNo : " + person.getMobileNo() + "\n"
                     + "EmailId  : " + person.getEmailId());
         }
+    }public static void deleteContact(String deleteName) {
+        List<Contact> contactPerson = addressBook.getContacts();
+        for (int i = 0; i < contactPerson.size(); i++) {
+            Contact person = contactPerson.get(i);
+            if (person.getFirstName().equals(deleteName)) {
+                contactPerson.remove(i);
+                addressBook.setContacts(contactPerson);
+            }
+        }
+        System.out.println("Contact deleted Successfully");
+        printContact(addressBook);
     }
 
     public static void main(String[] args) {
