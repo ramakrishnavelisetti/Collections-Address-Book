@@ -1,40 +1,54 @@
 package com.bdlz.collectionaddressbook;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AddressBookMain {
-    public static class contactDetails {
-        public String firstName;
-        public String lastName;
-        public String address;
-        public String city;
-        public String state;
-        public int zipCode;
-        public long mobileNo;
-        public String emailId;
+    public static AddressBook addressBook = new AddressBook();
 
+    public static void addContactDetails() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("  Add new contact ");
+        System.out.println("Enter the First Name");
+        String firstName = sc.next();
+        System.out.println("Enter the Last Name");
+        String lastName = sc.next();
+        System.out.println("Enter The Address");
+        String address = sc.next();
+        System.out.println("Enter the city");
+        String city = sc.next();
+        System.out.println("Enter the state");
+        String state = sc.next();
+        System.out.println("Enter the zip Code");
+        int zipCode = sc.nextInt();
+        System.out.println("Enter the Phone number");
+        long mobileNo = sc.nextLong();
+        System.out.println("Enter the Email");
+        String emailId = sc.next();
+        Contact contactDetails = new Contact(firstName, lastName, address, city, state, zipCode, mobileNo, emailId);
+        List<Contact> contactList = new ArrayList<>();
+        contactList.add(contactDetails);
+        addressBook.setContacts(contactList);
+        printContact(addressBook);
     }
-    public static void printContact () {
-        contactDetails person = new contactDetails();
-        person.firstName = ("Ramakrishna");
-        person.lastName = ("Velisetti");
-        person.address = ("Sitaramapuram-A");
-        person.city = ("Vijayawada");
-        person.state = ("Andhra Pradesh");
-        person.zipCode = (521109);
-        person.mobileNo = (8500029054L);
-        person.emailId = ("ramakrishna31.velisetti@gmail.com");
-        System.out.println("Personal Details:- ");
-        System.out.println("Name     : "  + person.firstName +" " + person.lastName + "\n"
-                + "Address  : "  + person.address   + "\n"
-                + "City     : "  + person.city      + "\n"
-                + "State    : "  + person.state     + "\n"
-                + "ZipCode  : "  + person.zipCode   + "\n"
-                + "MobileNo : "  + person.mobileNo  + "\n"
-                + "EmailId  : "  + person.emailId);
+    public static void printContact (AddressBook addressBook) {
+        List<Contact> contactPerson = addressBook.getContacts();
+        for (int i = 0; i < contactPerson.size(); i++) {
+            Contact person = contactPerson.get(i);
+            System.out.println("Personal Details:- ");
+            System.out.println("Name     : " + person.getFirstName() + " " + person.getLastName() + "\n"
+                    + "Address  : " + person.getAddress() + "\n"
+                    + "City     : " + person.getCity() + "\n"
+                    + "State    : " + person.getState() + "\n"
+                    + "ZipCode  : " + person.getZipCode() + "\n"
+                    + "MobileNo : " + person.getMobileNo() + "\n"
+                    + "EmailId  : " + person.getEmailId());
+        }
     }
 
     public static void main(String[] args) {
-        printContact();
+        addContactDetails();
     }
 }
